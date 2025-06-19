@@ -1,6 +1,7 @@
 <script setup>
+  import MainLayout from '@/layouts/MainLayout.vue';
 </script>
 
 <template>
-  <h1>Welcome To Vue Laravel Blog</h1>
+  <MainLayout />
 </template>
