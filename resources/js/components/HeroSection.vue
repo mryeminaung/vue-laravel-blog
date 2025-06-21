@@ -6,7 +6,7 @@
   <section class="bg-[#EEF5FF] flex items-center justify-center py-32 px-4">
     <div class="text-center max-w-4xl">
       <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
-        Creative Coder Myanmar
+        Creative Ninja Myanmar
       </h1>
       <p class="text-lg max-w-prose mx-auto text-gray-700">
         Explore programming languages, web development, and online courses. Discover tips, tricks, and insights from

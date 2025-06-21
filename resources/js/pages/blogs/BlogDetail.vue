@@ -1,15 +1,18 @@
 <script setup>
   import { Link } from '@inertiajs/vue3'
-  import BlogDetailLayout from '@/layouts/BlogDetailLayout.vue'
+  import BlogLayout from '@/layouts/BlogLayout.vue'
   import BlogYouMayLike from '@/components/BlogYouMayLike.vue'
+  import BlogComments from '@/components/BlogComments.vue';
+
+  defineProps({ blog: Object, relatedBlogs: Object });
 </script>
 
 <template>
-  <BlogDetailLayout>
+  <BlogLayout>
     <!-- Back Navigation -->
     <section class="bg-[#F9FAFB] py-5">
       <div class="max-w-4xl mx-auto">
-        <Link href="/" class="hover:text-blue-600 text-sm">&larr; Back to Blogs</Link>
+        <Link :href="route('blogs.index')" class="hover:text-blue-600 text-sm">&larr; Back to Blogs</Link>
       </div>
     </section>
 
@@ -17,14 +20,14 @@
     <article class="max-w-4xl mx-auto px-4">
       <!-- Meta Info -->
       <div class="flex justify-center items-center gap-5 mt-8 text-sm text-gray-600">
-        <p>Ye Min Aung</p>
+        <p>{{ blog.author.name }}</p>
         <p>December 15, 2024</p>
-        <p>5 mins read</p>
+        <p>{{ blog.estimated_read_time }} mins read</p>
       </div>
 
       <!-- Title -->
       <h1 class="text-5xl font-bold text-center my-7">
-        Modern CSS Layout Techniques
+        {{ blog.title }}
       </h1>
 
       <!-- Tags -->
@@ -40,16 +43,7 @@
 
       <!-- Content -->
       <div class="text-gray-700 text-lg leading-relaxed space-y-6">
-        <p>
-          In today's fast-paced digital world, staying connected and informed has never been more important. Whether
-          you're a business owner, student, or simply someone passionate about learning, the internet provides endless
-          opportunities to grow and engage. Blogs have become one of the most effective ways to share insights, tell
-          stories, and build communities.
-        </p>
-        <p>
-          They offer a platform for expression and knowledge exchange, making it easier than ever for voices of all
-          backgrounds to be heard and appreciated.
-        </p>
+        <p>{{ blog.content }}</p>
       </div>
 
       <!-- Divider -->
@@ -64,9 +58,15 @@
           <Link class="bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-600 transition">LinkedIn</Link>
         </div>
       </div>
+
+      <!-- Divider -->
+      <hr class="my-10 border-gray-300" />
+
+      <!-- Comments Section -->
+      <BlogComments :comments_count="blog.comments_count" :comments="blog.comments" />
     </article>
 
     <!-- Related Blogs -->
-    <BlogYouMayLike />
-  </BlogDetailLayout>
+    <BlogYouMayLike :relatedBlogs="relatedBlogs" />
+  </BlogLayout>
 </template>

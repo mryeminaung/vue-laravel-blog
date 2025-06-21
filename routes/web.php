@@ -1,15 +1,26 @@
 <?php
 
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\HomeController;
+use App\Http\Resources\BlogResource;
+use App\Http\Resources\CommentResource;
+use App\Models\Blog;
+use App\Models\Comment;
+use App\Models\Tag;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome');
+Route::get('/', HomeController::class);
+
+Route::resource('/blogs', BlogController::class);
+
+Route::get('/tags', function () {
+    return Tag::all();
 });
 
-Route::get('/blogs/1', function () {
-    return Inertia::render('blogs/BlogDetail');
-})->name('blogs.show');
+Route::get('/comments', function () {
+    return CommentResource::collection(Comment::all());
+});
 
 Route::get('/login', function () {
     return Inertia::render('auth/Login');

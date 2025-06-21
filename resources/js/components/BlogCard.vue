@@ -1,5 +1,7 @@
 <script setup>
   import { Link } from '@inertiajs/vue3';
+
+  defineProps({ blog: Object });
 </script>
 
 <template>
@@ -12,12 +14,13 @@
     <!-- Content -->
     <div class="px-5 pt-4 pb-6">
       <h3 class="text-xl font-bold group-hover:text-blue-600 transition-colors duration-200">
-        Modern CSS Layout Techniques
+        {{ blog?.title }}
       </h3>
-      <p class="my-2 text-sm text-gray-500">Ye Min Aung · 2 days ago</p>
-      <p class="text-gray-700 text-sm">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim a
-        nobis, possimus tenetur cumque dignissimos.
+      <p class="my-3.5 text-sm text-gray-500">
+        {{ blog?.author.name }} · 2 days ago
+      </p>
+      <p class="text-gray-700 text-sm line-clamp-3">
+        {{ blog?.content }}
       </p>
 
       <!-- Tags -->
@@ -28,7 +31,7 @@
       </div>
 
       <!-- CTA Button -->
-      <Link :href="route('blogs.show')"
+      <Link :href="route('blogs.show', blog)"
         class="block text-center bg-gray-100 py-2 rounded-lg text-gray-700 font-semibold hover:bg-blue-500 hover:text-white transition-colors duration-200">
       Read More
       </Link>
