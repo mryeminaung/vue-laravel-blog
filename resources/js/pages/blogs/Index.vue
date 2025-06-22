@@ -4,14 +4,16 @@
   import BlogLayout from '@/layouts/BlogLayout.vue';
 
   const props = defineProps({
-    blogs: Object
+    blogs: Object,
+    categories: Object,
+    tags: Object
   });
 </script>
 
 <template>
   <BlogLayout>
     <!-- Hero Section -->
-    <section class="bg-[#F9FAFB] py-16">
+    <section class="bg-[#F9FAFB] py-20">
       <div class="max-w-6xl mx-auto text-center space-y-5">
         <h2 class="text-5xl font-bold">All Blogs</h2>
         <p class="text-xl max-w-2xl mx-auto">
@@ -21,7 +23,7 @@
     </section>
 
     <!-- Filter Section -->
-    <BlogFilter />
+    <BlogFilter :tags="tags" :categories="categories" />
 
     <!-- Blog Grid -->
     <section class="bg-[#F9FAFB] py-16">

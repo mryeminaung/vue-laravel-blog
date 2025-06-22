@@ -3,6 +3,8 @@
   import BlogLayout from '@/layouts/BlogLayout.vue'
   import BlogYouMayLike from '@/components/BlogYouMayLike.vue'
   import BlogComments from '@/components/BlogComments.vue';
+  import { getCategoryColor } from '@/lib/utils';
+  import BlogHeader from '@/components/BlogHeader.vue';
 
   defineProps({ blog: Object, relatedBlogs: Object });
 </script>
@@ -11,31 +13,24 @@
   <BlogLayout>
     <!-- Back Navigation -->
     <section class="bg-[#F9FAFB] py-5">
-      <div class="max-w-4xl mx-auto">
-        <Link :href="route('blogs.index')" class="hover:text-blue-600 text-sm">&larr; Back to Blogs</Link>
+      <div class="max-w-4xl mx-auto flex items-center">
+        <div class="flex items-center gap-1 group">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500 group-hover:text-blue-600 transition"
+            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          <Link :href="route('blogs.index')"
+            class="font-medium text-sm text-gray-700 group-hover:text-blue-600 transition">
+          Back to Blogs
+          </Link>
+        </div>
       </div>
     </section>
 
     <!-- Blog Content -->
     <article class="max-w-4xl mx-auto px-4">
       <!-- Meta Info -->
-      <div class="flex justify-center items-center gap-5 mt-8 text-sm text-gray-600">
-        <p>{{ blog.author.name }}</p>
-        <p>December 15, 2024</p>
-        <p>{{ blog.estimated_read_time }} mins read</p>
-      </div>
-
-      <!-- Title -->
-      <h1 class="text-5xl font-bold text-center my-7">
-        {{ blog.title }}
-      </h1>
-
-      <!-- Tags -->
-      <div class="flex justify-center gap-2 mt-3 mb-5">
-        <span class="bg-blue-100 text-blue-600 text-xs font-semibold px-3 py-1 rounded-full">React</span>
-        <span class="bg-blue-100 text-blue-600 text-xs font-semibold px-3 py-1 rounded-full">TS</span>
-        <span class="bg-blue-100 text-blue-600 text-xs font-semibold px-3 py-1 rounded-full">Tutorial</span>
-      </div>
+      <BlogHeader :blog="blog" />
 
       <!-- Cover Image -->
       <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=250&fit=crop" alt="Blog Cover"
@@ -53,9 +48,12 @@
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-10">
         <p class="font-semibold">Share this article:</p>
         <div class="flex gap-3">
-          <Link class="bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-600 transition">Twitter</Link>
-          <Link class="bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-600 transition">Facebook</Link>
-          <Link class="bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-600 transition">LinkedIn</Link>
+          <Link :href="route('blogs.index')"
+            class="bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-600 transition">Twitter</Link>
+          <Link :href="route('blogs.index')"
+            class="bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-600 transition">Facebook</Link>
+          <Link :href="route('blogs.index')"
+            class="bg-blue-500 text-white rounded-md py-2 px-4 hover:bg-blue-600 transition">LinkedIn</Link>
         </div>
       </div>
 

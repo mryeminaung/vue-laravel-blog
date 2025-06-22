@@ -1,4 +1,5 @@
 <script setup>
+  import { getCategoryColor } from '@/lib/utils';
   import { Link } from '@inertiajs/vue3';
 
   defineProps({ blog: Object });
@@ -7,9 +8,19 @@
 <template>
   <div
     class="rounded-xl group overflow-hidden bg-white w-full shadow-md hover:shadow-xl hover:-translate-y-2 transition-all duration-300 ease-in-out transform">
-    <!-- Image -->
-    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=250&fit=crop" alt="Blog Cover"
-      class="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-300 ease-in-out" />
+    <div class="relative">
+      <!-- Image -->
+      <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=250&fit=crop" alt="Blog Cover"
+        class="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-300 ease-in-out" />
+      <span class="text-[12px] rounded-full px-2 py-1 top-1 right-2 absolute" :class="{
+        'bg-green-200 text-green-800': blog.tag.name === 'Beginner',
+        'bg-yellow-200 text-yellow-800': blog.tag.name === 'Intermediate',
+        'bg-red-200 text-red-800': blog.tag.name === 'Advanced'
+      }">
+        {{ blog.tag.name }}
+      </span>
+
+    </div>
 
     <!-- Content -->
     <div class="px-5 pt-4 pb-6">
@@ -23,11 +34,12 @@
         {{ blog?.content }}
       </p>
 
-      <!-- Tags -->
+      <!-- Categories -->
       <div class="space-x-2 mt-3 mb-5">
-        <span class="bg-blue-100 text-blue-600 text-xs font-semibold px-3 py-1 rounded-full">React</span>
-        <span class="bg-blue-100 text-blue-600 text-xs font-semibold px-3 py-1 rounded-full">TS</span>
-        <span class="bg-blue-100 text-blue-600 text-xs font-semibold px-3 py-1 rounded-full">Tutorial</span>
+        <span v-for="category in blog.categories" :class="getCategoryColor(category.name)"
+          class="text-[12px] rounded-full px-2 py-1">
+          {{ category.name }}
+        </span>
       </div>
 
       <!-- CTA Button -->

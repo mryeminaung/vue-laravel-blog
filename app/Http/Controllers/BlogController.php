@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\BlogResource;
 use App\Models\Blog;
+use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -16,8 +18,10 @@ class BlogController extends Controller
     {
         return Inertia::render('blogs/Index', [
             'blogs' => BlogResource::collection(
-                Blog::with(['author', 'comments'])->paginate(3)
+                Blog::with(['author', 'comments', 'categories'])->paginate(6)
             ),
+            'categories' => Category::select(['id', 'name', 'slug'])->orderBy('id', 'asc')->get(),
+            'tags' => Tag::select(['id', 'name'])->orderBy('id', 'asc')->get(),
         ]);
     }
 
@@ -44,10 +48,10 @@ class BlogController extends Controller
     {
         return Inertia::render('blogs/BlogDetail', [
             'blog' => new BlogResource(
-                $blog->load(['author', 'comments'])
+                $blog->load(['author', 'comments', 'categories'])
             ),
             'relatedBlogs' => BlogResource::collection(
-                Blog::with(['author', 'comments'])
+                Blog::with(['author', 'comments', 'categories'])
                     ->where('id', '!=', $blog->id)
                     ->inRandomOrder()
                     ->take(3)

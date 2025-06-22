@@ -9,7 +9,7 @@
     <BlogNavbar />
 
     <!-- Main Content -->
-    <main class="flex-1 mt-18">
+    <main class="flex-1 mt-16">
       <slot />
     </main>
 

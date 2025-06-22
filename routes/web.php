@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TagController;
 use App\Http\Resources\BlogResource;
 use App\Http\Resources\CommentResource;
 use App\Models\Blog;
@@ -14,9 +15,7 @@ Route::get('/', HomeController::class);
 
 Route::resource('/blogs', BlogController::class);
 
-Route::get('/tags', function () {
-    return Tag::all();
-});
+Route::resource('/tags', TagController::class);
 
 Route::get('/comments', function () {
     return CommentResource::collection(Comment::all());

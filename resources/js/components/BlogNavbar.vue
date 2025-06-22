@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <nav class="fixed top-0 inset-x-0 bg-white shadow z-50 py-3 px-4">
+  <nav class="fixed top-0 inset-x-0 bg-white shadow z-50 py-2 px-4">
     <div class="max-w-6xl mx-auto flex items-center justify-between">
       <!-- Logo / Title -->
       <Link href="/" class="-space-y-1">

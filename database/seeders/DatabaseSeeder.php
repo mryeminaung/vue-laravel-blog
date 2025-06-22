@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Blog;
+use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Tag;
 use App\Models\User;
@@ -16,19 +17,31 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Tag::factory(10)->create();
+        $this->call([
+            TagSeeder::class,
+            BlogCategorySeeder::class,
+        ]);
 
         User::factory()
             ->count(3)
             ->has(
                 Blog::factory()
                     ->count(5)
-                    ->has(
-                        Comment::factory()->count(3),
-                        'comments' // blog()->comments() relationship name
-                    ),
-                'blogs' // user()->blogs() relationship name
+                    ->has(Comment::factory()->count(3), 'comments'),
+                'blogs'
             )
-            ->create();
+            ->create()
+            ->each(function ($user) {
+                foreach ($user->blogs as $blog) {
+                    // Assign a random tag
+                    $tag = Tag::inRandomOrder()->first();
+                    $blog->tag()->associate($tag);
+                    $blog->save();
+
+                    // Attach 3 random categories
+                    $categoryIds = Category::inRandomOrder()->limit(3)->pluck('id');
+                    $blog->categories()->sync($categoryIds);
+                }
+            });
     }
 }

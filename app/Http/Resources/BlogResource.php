@@ -20,7 +20,19 @@ class BlogResource extends JsonResource
             'slug' => $this->slug,
             'content' => $this->content,
             'estimated_read_time' => $this->estimated_read_time,
-            'tag' => $this->tag,
+            'categories' => $this->whenLoaded('categories', function () {
+                return $this->categories->map(function ($category) {
+                    return [
+                        'id' => $category->id,
+                        'name' => $category->name,
+                        'slug' => $category->slug,
+                    ];
+                });
+            }),
+            'tag' => [
+                'id' => $this->tag->id,
+                'name' => $this->tag->name,
+            ],
             'author' => [
                 'id' => $this->author->id,
                 'name' => $this->author->name,

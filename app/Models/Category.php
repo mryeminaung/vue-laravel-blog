@@ -10,7 +10,7 @@ class Category extends Model
     /** @use HasFactory<\Database\Factories\CategoryFactory> */
     use HasFactory;
 
-    public $fillable = ['name'];
+    public $fillable = ['name', 'slug'];
 
     public function blogs()
     {

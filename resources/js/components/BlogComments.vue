@@ -2,7 +2,7 @@
   import CommentCard from './CommentCard.vue';
 
   const props = defineProps({
-    comments_count: number,
+    comments_count: Number,
     comments: Array
   });
 

@@ -15,7 +15,7 @@ class HomeController extends Controller
     public function __invoke(Request $request)
     {
         return Inertia::render('Welcome', ['blogs' => BlogResource::collection(
-            Blog::with(['author', 'comments'])
+            Blog::with(['author', 'comments', 'categories'])
                 ->inRandomOrder()
                 ->take(6)
                 ->get()
