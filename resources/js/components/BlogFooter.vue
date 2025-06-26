@@ -3,11 +3,11 @@
 </script>
 
 <template>
-  <footer class="bg-[#111827] text-gray-800">
+  <footer class="bg-[#111827] shadow-2xl text-gray-800 ">
     <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 py-16">
       <!-- Branding -->
       <div class="md:col-span-2">
-        <h3 class="text-xl font-semibold mb-4 text-white">Creative Ninja Myanmar</h3>
+        <h3 class="text-xl font-semibold mb-4 text-white">Creative Dev, Myanmar</h3>
         <p class="max-w-md text-gray-600">
           Empowering Myanmar's creative coding community with quality tutorials, tips, and insights for modern web
           development.
@@ -46,7 +46,7 @@
 
     <!-- Copyright -->
     <div class="text-center py-6 text-sm text-gray-500">
-      © 2025 Creative Ninja Myanmar. All rights reserved.
+      © 2025 Creative Dev, Myanmar. All rights reserved.
     </div>
   </footer>
 </template>

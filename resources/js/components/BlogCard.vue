@@ -1,6 +1,7 @@
 <script setup>
   import { getCategoryColor } from '@/lib/utils';
   import { Link } from '@inertiajs/vue3';
+  import { Badge } from '@/components/ui/badge'
 
   defineProps({ blog: Object });
 </script>
@@ -12,13 +13,13 @@
       <!-- Image -->
       <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=250&fit=crop" alt="Blog Cover"
         class="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-300 ease-in-out" />
-      <span class="text-[12px] rounded-full px-2 py-1 top-1 right-2 absolute" :class="{
+      <Badge class="text-[12px] rounded-full px-2 py-1 top-1 right-2 absolute" :class="{
         'bg-green-200 text-green-800': blog.tag.name === 'Beginner',
         'bg-yellow-200 text-yellow-800': blog.tag.name === 'Intermediate',
         'bg-red-200 text-red-800': blog.tag.name === 'Advanced'
       }">
         {{ blog.tag.name }}
-      </span>
+      </Badge>
 
     </div>
 
@@ -35,16 +36,16 @@
       </p>
 
       <!-- Categories -->
-      <div class="space-x-2 mt-3 mb-5">
-        <span v-for="category in blog.categories" :class="getCategoryColor(category.name)"
-          class="text-[12px] rounded-full px-2 py-1">
+      <div class="gap-2 flex items-center flex-wrap mt-3 mb-5">
+        <Badge v-for="category in blog.categories" :class="getCategoryColor(category.name)"
+          class="text-[11px] rounded-full px-2 py-1">
           {{ category.name }}
-        </span>
+        </Badge>
       </div>
 
       <!-- CTA Button -->
       <Link :href="route('blogs.show', blog)"
-        class="block text-center bg-gray-100 py-2 rounded-lg text-gray-700 font-semibold hover:bg-blue-500 hover:text-white transition-colors duration-200">
+        class="block text-center bg-gray-100 py-2 rounded-lg text-gray-700 font-semibold hover:bg-blue-600 hover:text-white transition-colors duration-200">
       Read More
       </Link>
     </div>

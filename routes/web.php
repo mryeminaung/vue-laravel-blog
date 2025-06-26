@@ -21,6 +21,10 @@ Route::get('/comments', function () {
     return CommentResource::collection(Comment::all());
 });
 
+Route::get('/about', function () {
+    return Inertia::render('About');
+})->name('about');
+
 Route::get('/login', function () {
     return Inertia::render('auth/Login');
 })->name('auth.login');

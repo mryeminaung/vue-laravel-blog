@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('content');
             $table->string('slug')->unique();
             $table->unsignedInteger('estimated_read_time');
+            $table->boolean('is_published')->default(true);
             $table->foreignId('author_id')->constrained('users')->cascadeOnDelete();
             $table->foreignId('tag_id')->constrained('tags')->cascadeOnDelete();
             $table->timestamps();

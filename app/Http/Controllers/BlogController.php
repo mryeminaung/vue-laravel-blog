@@ -18,8 +18,9 @@ class BlogController extends Controller
     {
         return Inertia::render('blogs/Index', [
             'blogs' => BlogResource::collection(
-                Blog::with(['author', 'comments', 'categories'])->paginate(6)
+                Blog::filter(request(['search', 'category', 'tag']))->with(['author', 'comments', 'categories'])->paginate(6)->withQueryString()
             ),
+            'filters' =>  request()->only(['search', 'category', 'tag']),
             'categories' => Category::select(['id', 'name', 'slug'])->orderBy('id', 'asc')->get(),
             'tags' => Tag::select(['id', 'name'])->orderBy('id', 'asc')->get(),
         ]);
@@ -30,7 +31,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        //
+        return dd('blog create');
     }
 
     /**

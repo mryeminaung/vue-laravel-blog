@@ -14,7 +14,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-[#111827] text-white">
+    <footer class="text-white">
       <BlogFooter />
     </footer>
   </div>

@@ -1,3 +1,15 @@
+import { clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs) {
+    return twMerge(clsx(inputs));
+}
+
+export const getInitials = (name) => {
+    const parts = name.trim().split(" ");
+    return parts.length > 1 ? parts[0][0] + parts[1][0] : name.slice(0, 2);
+};
+
 export const getCategoryColor = (category) => {
     const colors = [
         "bg-blue-100 text-blue-700",

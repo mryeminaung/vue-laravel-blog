@@ -10,7 +10,27 @@ class Blog extends Model
     /** @use HasFactory<\Database\Factories\BlogFactory> */
     use HasFactory;
 
-    public $fillable = ['title', 'content', 'slug', 'estimated_read_time', 'author_id', 'blog_id'];
+    public $fillable = ['title', 'content', 'slug', 'estimated_read_time', 'author_id', 'blog_id', 'is_published'];
+
+    public function scopeFilter($query, array $filters)
+    {
+        if ($filters['search'] ?? false) {
+            $query->where('title', 'like', '%' . request('search') . '%')
+                ->orWhere('content', 'like', '%' . request('search') . '%');
+        }
+
+        if ($filters['category'] ?? false) {
+            $query->whereHas('categories', function ($query) {
+                $query->where('slug', request('category'));
+            });
+        }
+
+        if ($filters['tag'] ?? false) {
+            $query->whereHas('tag', function ($query) {
+                $query->where('name', request('tag'));
+            });
+        }
+    }
 
     public function getRouteKeyName()
     {

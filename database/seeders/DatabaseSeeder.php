@@ -23,11 +23,11 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory()
-            ->count(3)
+            ->count(5)
             ->has(
                 Blog::factory()
                     ->count(5)
-                    ->has(Comment::factory()->count(3), 'comments'),
+                    ->has(Comment::factory()->count(2), 'comments'),
                 'blogs'
             )
             ->create()
